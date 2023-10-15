@@ -1,8 +1,13 @@
 @Library('jenkins_shared_library') _
 pipeline{
     agent any
+    parameters{
+        choice(name: 'action' , choices:'create\ndelete' , description:'choose create/destroy')
+    }
     stages{
+        
         stage('Git Checkout'){
+            when { expression{ param.action == 'create'}}
             steps{
             gitCheckout(
                         branch: "main",
@@ -10,7 +15,9 @@ pipeline{
             )    
             }
         }
+        
         stage('Unit Testing Using Maven'){
+            when {expression { param.action == 'create'}}
             steps{
                 script{
                     mvnTest()
@@ -18,10 +25,21 @@ pipeline{
             
             }
         }
+       
         stage('Integration Mvn test'){
+            when{ expression { param.action== 'create'}}
             steps{
                 script{
                     mvnIntegrationTest()
+                }
+            
+            }
+        }
+        stage('static code analysis : SonarQube'){
+            when{ expression { param.action== 'create'}}
+            steps{
+                script{
+                    staticCodeAnalysis()
                 }
             
             }
