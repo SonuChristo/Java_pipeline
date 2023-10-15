@@ -4,12 +4,10 @@ pipeline{
     stages{
         stage('git checkout'){
             steps{
-                script{
-                    gitCheckout{
+            gitCheckout{
                         branch: "main",
                         url: "https://github.com/SonuChristo/Java_pipeline.git"
-                    }
-                }
+                    }    
             }
         }
     }
