@@ -88,7 +88,7 @@ stage('Docker Image Push  : DockerHub') {
             steps {
              script {
                 
-                dockerImagePushr("${params.ImageName}" , "${params.ImageTag}" , "${params.DockerHubUser}")
+                dockerImagePush("${params.ImageName}" , "${params.ImageTag}" , "${params.DockerHubUser}")
         }
     }
 }
