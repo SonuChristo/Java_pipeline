@@ -3,9 +3,9 @@ pipeline{
     agent any
     parameters{
         choice(name: 'action' , choices:'create\ndelete' , description:'choose create/destroy')
-        string(imageName: "name of the Image" , description: "Image Name" , defaultValue : "Javaapp")
-        string(imageTag: "tag of the Image" , description: "Image Tag" , defaultValue : "V1")
-        string(applicationName: "name of the application" , description: "Application Name" , defaultValue : "Java")
+        string(name: 'ImageName' , description: "name of the Image" , defaultValue : 'Javaapp')
+        string(name: 'ImageTag' , description: "tag of the Image" , defaultValue : 'V1')
+        string(name: 'AppName' , description: "name of the application" , defaultValue : 'Java')
     }
     stages{
         
@@ -70,7 +70,7 @@ pipeline{
             steps {
              script {
                 
-                dockerBuild("${params.imageName} , ${params.imageTag} , ${params.applicationName}")
+                dockerBuild("${params.ImageName}" , "${params.ImageTag}" , "${params.AppName}")
         }
     }
 }
