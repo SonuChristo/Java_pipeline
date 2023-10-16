@@ -74,5 +74,14 @@ pipeline{
         }
     }
 }
+stage('Docker Image Scanner  : Trivy') {
+        when { expression { params.action == 'create' } }
+            steps {
+             script {
+                
+                dockerImageScanner("${params.ImageName}" , "${params.ImageTag}" , "${params.DockerHubUser}")
+        }
+    }
+}
     }
 }
