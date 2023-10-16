@@ -83,5 +83,14 @@ stage('Docker Image Scanner  : Trivy') {
         }
     }
 }
+stage('Docker Image Push  : DockerHub') {
+        when { expression { params.action == 'create' } }
+            steps {
+             script {
+                
+                dockerImagePushr("${params.ImageName}" , "${params.ImageTag}" , "${params.DockerHubUser}")
+        }
+    }
+}
     }
 }
