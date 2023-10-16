@@ -36,11 +36,20 @@ pipeline{
             }
         }
        stage('static code analysis : SonarQube') {
-    when { expression { params.action == 'create' } }
-    steps {
-        script {
-            def SonarQubeCredentialsId = 'sonar-api'
-            staticCodeAnalysis(SonarQubeCredentialsId)
+        when { expression { params.action == 'create' } }
+            steps {
+             script {
+                 def SonarQubeCredentialsId = 'sonar-api'
+                staticCodeAnalysis(SonarQubeCredentialsId)
+        }
+    }
+}
+       stage('Quality gate status  : SonarQube') {
+        when { expression { params.action == 'create' } }
+            steps {
+             script {
+                 def SonarQubeCredentialsId = 'sonar-api'
+                qualityGateStatus(SonarQubeCredentialsId)
         }
     }
 }
