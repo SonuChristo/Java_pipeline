@@ -65,41 +65,5 @@ pipeline{
         }
     }
 }
-       stage('Docker Image : Build') {
-        when { expression { params.action == 'create' } }
-            steps {
-             script {
-                
-                dockerBuild("${params.ImageName}" , "${params.ImageTag}" , "${params.DockerHubUser}")
-        }
-    }
 }
-stage('Docker Image Scanner  : Trivy') {
-        when { expression { params.action == 'create' } }
-            steps {
-             script {
-                
-                dockerImageScanner("${params.ImageName}" , "${params.ImageTag}" , "${params.DockerHubUser}")
-        }
-    }
-}
-stage('Docker Image Push  : DockerHub') {
-        when { expression { params.action == 'create' } }
-            steps {
-             script {
-                
-                dockerImagePush("${params.ImageName}" , "${params.ImageTag}" , "${params.DockerHubUser}")
-        }
-    }
-}
-stage('Docker Image Cleanup  : DockerImage') {
-        when { expression { params.action == 'create' } }
-            steps {
-             script {
-            
-                dockerImageCleanup("${params.ImageName}" , "${params.ImageTag}" , "${params.DockerHubUser}")
-        }
-    }
-}
-    }
 }
