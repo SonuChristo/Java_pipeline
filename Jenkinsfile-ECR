@@ -74,5 +74,32 @@ stage('Docker Image Build  : ECR') {
         }
     }
 }
+stage('Docker Image Scanner  : Trivy') {
+        when { expression { params.action == 'create' } }
+            steps {
+             script {
+                
+                dockerImageScanner("${params.aws_acc_id}" , "${params.region}" , "${params.ecr_repo}")
+        }
+    }
+}
+stage('Docker Image Push  : DockerHub') {
+        when { expression { params.action == 'create' } }
+            steps {
+             script {
+                
+                dockerImagePush("${params.aws_acc_id}" , "${params.region}" , "${params.ecr_repo}")
+        }
+    }
+}
+stage('Docker Image Cleanup  : DockerImage') {
+        when { expression { params.action == 'create' } }
+            steps {
+             script {
+            
+                dockerImageCleanup("${params.aws_acc_id}" , "${params.region}" , "${params.ecr_repo}")
+        }
+    }
+}
 }
 }
