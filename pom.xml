@@ -75,7 +75,7 @@
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>3.10.0.2594</version> <!-- Use the appropriate version -->
                  <configuration>
-                <sonar.host.url>http://13.233.0.252:9000</sonar.host.url>
+                <sonar.host.url>http://13.234.204.26:9000</sonar.host.url>
                 <sonar.login>admin</sonar.login>
                 <sonar.password>Sonu@455</sonar.password>
             </configuration>
