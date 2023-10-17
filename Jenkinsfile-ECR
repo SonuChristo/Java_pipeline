@@ -3,9 +3,9 @@ pipeline{
     agent any
     parameters{
         choice(name: 'action' , choices:'create\ndelete' , description:'choose create/destroy')
-        string(name: 'aws_acc_id' , description: "name of the Image" , defaultValue : '750823553918')
-        string(name: 'region' , description: "tag of the Image" , defaultValue : 'us-east-1')
-        string(name: 'ecr_repo' , description: "name of the application" , defaultValue : 'nathaniel')
+        string(name: 'aws_acc_id' , description: "aws_acc_id" , defaultValue : '750823553918')
+        string(name: 'region' , description: "aws region" , defaultValue : 'us-east-1')
+        string(name: 'ecr_repo' , description: "name of the ecr repo" , defaultValue : 'nathaniel')
     }
     stages{
         
