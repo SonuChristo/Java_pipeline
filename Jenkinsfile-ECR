@@ -3,9 +3,9 @@ pipeline{
     agent any
     parameters{
         choice(name: 'action' , choices:'create\ndelete' , description:'choose create/destroy')
-        string(name: 'ImageName' , description: "name of the Image" , defaultValue : 'java')
-        string(name: 'ImageTag' , description: "tag of the Image" , defaultValue : 'V1')
-        string(name: 'DockerHubUser' , description: "name of the application" , defaultValue : 'nathaniel2662000')
+        string(name: 'aws_acc_id' , description: "name of the Image" , defaultValue : '750823553918')
+        string(name: 'region' , description: "tag of the Image" , defaultValue : 'us-east-1')
+        string(name: 'ecr_repo' , description: "name of the application" , defaultValue : 'nathaniel')
     }
     stages{
         
@@ -62,6 +62,15 @@ pipeline{
              script {
                 
                 mavenBuild()
+        }
+    }
+}
+stage('Docker Image Build  : ECR') {
+        when { expression { params.action == 'create' } }
+            steps {
+             script {
+            
+                dockerImageCleanup("${params.aws_acc_id}" , "${params.region}" , "${params.ecr_repo}")
         }
     }
 }
