@@ -70,7 +70,7 @@ stage('Docker Image Build  : ECR') {
             steps {
              script {
             
-                dockerImageCleanup("${params.aws_acc_id}" , "${params.region}" , "${params.ecr_repo}")
+                dockerBuild("${params.aws_acc_id}" , "${params.region}" , "${params.ecr_repo}")
         }
     }
 }
@@ -92,14 +92,14 @@ stage('Docker Image Push  : DockerHub') {
         }
     }
 }
-// stage('Docker Image Cleanup  : DockerImage') {
-//         when { expression { params.action == 'create' } }
-//             steps {
-//              script {
+stage('Docker Image Cleanup  : DockerImage') {
+        when { expression { params.action == 'create' } }
+            steps {
+             script {
             
-//                 dockerImageCleanup("${params.aws_acc_id}" , "${params.region}" , "${params.ecr_repo}")
-//         }
-//     }
-// }
+                dockerImageCleanup("${params.aws_acc_id}" , "${params.region}" , "${params.ecr_repo}")
+        }
+    }
+}
 }
 }
