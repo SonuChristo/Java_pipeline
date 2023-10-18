@@ -83,7 +83,7 @@ stage('Docker Image Scanner  : Trivy') {
         }
     }
 }
-stage('Docker Image Push  : DockerHub') {
+stage('Docker Image Push  : ECR') {
         when { expression { params.action == 'create' } }
             steps {
              script {
